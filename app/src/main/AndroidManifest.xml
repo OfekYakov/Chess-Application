@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/app_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ChessProject"
+        tools:targetApi="31">
+        <activity
+            android:name=".AppActivities.ShowPreviousGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.PreviousGamesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.LeaderboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.WaitingRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.GameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppActivities.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

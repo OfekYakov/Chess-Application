@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5EB"
+    tools:context=".AppActivities.GameActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/UserProfilePic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:src="@drawable/default_profile_picture"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/EnemyProfilePic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/default_profile_picture" />
+
+    <TextView
+        android:id="@+id/UserUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="User username"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/UserProfilePic"
+        app:layout_constraintEnd_toStartOf="@+id/UserProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/UserProfilePic" />
+
+    <TextView
+        android:id="@+id/EnemyUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="Enemy username"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EnemyProfilePic"
+        app:layout_constraintEnd_toStartOf="@+id/EnemyProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/EnemyProfilePic" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/chessLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/userTimerView"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:background="#93C8C3"
+        android:gravity="center"
+        android:text="15:00"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/UserProfilePic"
+        app:layout_constraintStart_toStartOf="@+id/UserUserName"
+        app:layout_constraintTop_toBottomOf="@+id/UserProfilePic" />
+
+    <TextView
+        android:id="@+id/enemyPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/enemyTimerView"
+        app:layout_constraintEnd_toStartOf="@+id/enemyTimerView"
+        app:layout_constraintTop_toTopOf="@+id/enemyTimerView" />
+
+    <TextView
+        android:id="@+id/userPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userTimerView"
+        app:layout_constraintEnd_toStartOf="@+id/userTimerView"
+        app:layout_constraintTop_toTopOf="@+id/userTimerView" />
+
+    <TextView
+        android:id="@+id/enemyTimerView"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="40dp"
+        android:background="#93C8C3"
+        android:gravity="center"
+        android:text="15:00"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/EnemyProfilePic"
+        app:layout_constraintEnd_toEndOf="@+id/EnemyProfilePic"
+        app:layout_constraintStart_toStartOf="@+id/EnemyUserName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

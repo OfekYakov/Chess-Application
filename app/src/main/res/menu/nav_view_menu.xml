@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/PreviousGames" android:title="Previous Gamed" android:icon="@drawable/baseline_format_list_bulleted_24"/>
+        <item android:id="@+id/Leaderboard" android:title="Leaderboard" android:icon="@drawable/baseline_leaderboard_24"/>
+    </group>
+
+    <group>
+
+        <item android:title="Authentication">
+            <menu>
+                <item android:id="@+id/Logout" android:title="Logout" android:icon="@drawable/baseline_logout_24"/>
+            </menu>
+        </item>
+
+    </group>
+
+</menu>

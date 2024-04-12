@@ -1,0 +1,397 @@
+@startuml
+class com.example.chessproject.GamesRecords.gameRecord {
++ ArrayList<String> gameMoves
++ String gameResult
++ Player enemyPlayer
++ <<Create>> gameRecord()
++ <<Create>> gameRecord(ArrayList<String>,String,Player)
+}
+class com.example.chessproject.ChessPieces.Pawn {
++ <<Create>> Pawn(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.AppActivities.ShowPreviousGameActivity {
+~ ImageView btnNext
+~ recordedGameCanvas gameCanvas
+~ LinearLayout chessLayout
+~ ImageView UserProfilePic
+~ TextView UserUsername
+# void onCreate(Bundle)
++ void getEnemyProfilePicture()
++ int getScreenWidth()
+}
+class com.example.chessproject.AppActivities.ShowPreviousGameActivity$recordedGameCanvas {
+~ ArrayList<String> allGamesPositions
+~ Color playerColor
+~ Board game_board
+~ int positionCounter
+~ int screenWidth
+~ int boardColorID
+~ Context context
++ <<Create>> recordedGameCanvas(Context,ArrayList<String>,String,int)
++ void onClickNext()
++ void onPreviousClick()
+# void onDraw(Canvas)
++ void drawBlackViewBoard(Canvas)
++ void drawWhiteViewBoard(Canvas)
+}
+class com.example.chessproject.BoardUtilities.Tile {
+- Piece pieceOnTile
++ <<Create>> Tile(Piece)
++ Piece getPieceOnTile()
++ void setPieceOnTile(Piece)
+}
+class com.example.chessproject.GamesRecords.gameRecordAdapter {
+~ ArrayList<gameRecord> allGames
+- GameRecordRecyclerViewInterface gameRecordRecyclerViewInterface
++ <<Create>> gameRecordAdapter(ArrayList<gameRecord>,GameRecordRecyclerViewInterface)
++ gameRecordViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(gameRecordViewHolder,int)
++ int getItemCount()
+}
+class com.example.chessproject.GamesRecords.gameRecordAdapter$gameRecordViewHolder {
+~ TextView enemyName
+~ TextView gameResult
+~ TextView playerColor
++ <<Create>> gameRecordViewHolder(View,GameRecordRecyclerViewInterface)
+}
+class com.example.chessproject.Fragments.HomeScreenFragment {
+~ Button btnPlay
++ <<Create>> HomeScreenFragment()
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+class com.example.chessproject.BoardUtilities.Coordinate {
+- int i
+- int j
++ <<Create>> Coordinate(int,int)
++ int getI()
++ int getJ()
++ void setI(int)
++ void setJ(int)
++ {static} boolean isCoordinateEquals(Coordinate,Coordinate)
+}
+class com.example.chessproject.LeaderBoard.LeaderBoardItem {
++ String UserName
++ int UserScore
++ Bitmap UserPicture
++ <<Create>> LeaderBoardItem(String,int,Bitmap)
++ String getUserName()
++ void setUserName(String)
++ int getUserScore()
++ void setUserScore(int)
++ Bitmap getUserPicture()
++ void setUserPicture(Bitmap)
+}
+class com.example.chessproject.AppActivities.PreviousGamesActivity {
+~ ArrayList<gameRecord> allPreviousGame
+~ RecyclerView previousGamesRecycler
+# void onCreate(Bundle)
++ void onItemClick(int)
+}
+abstract class com.example.chessproject.ChessPieces.Piece {
+# Color color
++ <<Create>> Piece(Color)
++ Color getColor()
++ {abstract}ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.UserUtils.VerificationUtils {
++ {static} String UserNameVerification(String)
++ {static} String passwordVerification(String)
+}
+class com.example.chessproject.Fragments.SettingsScreenFragment {
+~ RadioGroup radioGroup
+~ SharedPreferences sharedPreferences
+~ SharedPreferences.Editor editor
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+class com.example.chessproject.UserUtils.User {
++ int ChessScore
++ String username
++ String password
++ <<Create>> User()
++ <<Create>> User(String,String,int)
+}
+class com.example.chessproject.Fragments.UserProfileScreenFragment {
+~ ActivityResultLauncher activityResultLauncher
+~ ImageView profilePicture
+~ EditText etUserName
+~ TextView tvEmail
+~ ProgressDialog progressDialog
+~ Button saveBtn
+~ DatabaseReference userReference
++ <<Create>> UserProfileScreenFragment()
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void changeUserData()
++ void takePictureFromCamera()
++ void onClick(View)
++ void UploadPictureToStorage()
+}
+class com.example.chessproject.LeaderBoard.leaderBoardAdapter {
+~ ArrayList<LeaderBoardItem> usersTemplates
++ <<Create>> leaderBoardAdapter(ArrayList<LeaderBoardItem>)
++ leaderboardViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(leaderboardViewHolder,int)
++ int getItemCount()
+}
+class com.example.chessproject.LeaderBoard.leaderBoardAdapter$leaderboardViewHolder {
+~ TextView UserName
+~ TextView UserScore
+~ ImageView UserPicture
++ <<Create>> leaderboardViewHolder(View)
+}
+class com.example.chessproject.AppActivities.MainActivity {
+~ FirebaseAuth firebaseAuth
+~ FirebaseDatabase firebaseDatabase
+~ BottomNavigationView bottomNavigationView
+~ ProgressDialog progressDialog
+- DrawerLayout drawerLayout
+# void onCreate(Bundle)
++ void replaceFragment(Fragment)
++ void onBackPressed()
++ void retrieveUserData()
++ void getUserProfileImageFromStorage()
+}
+class com.example.chessproject.ChessPieces.King {
++ <<Create>> King(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.BoardUtilities.BoardUtils {
++ <<Create>> BoardUtils()
++ {static} Bitmap Piece_To_Picture(Piece,int,Resources)
++ {static} Piece char_To_Piece(char)
++ {static} void FEN_To_Board(Tile[][],String)
++ {static} char Piece_To_Char(Piece)
++ {static} Coordinate convertToCoordinateForWhitePlayer(float,float,int)
++ {static} Coordinate convertToCoordinateForBlackPlayer(float,float,int)
++ {static} String board_To_FEN(Tile[][])
+}
+class com.example.chessproject.BoardUtilities.Player {
++ Color playerColor
++ String uid
++ <<Create>> Player()
++ <<Create>> Player(Color,String)
+}
+class com.example.chessproject.AppActivities.WaitingRoomActivity {
+~ ValueEventListener newRefListener
+~ ProgressDialog progressDialog
+~ DatabaseReference playingRoomsReference
+~ DatabaseReference waitingRoomsReference
+~ DatabaseReference newRoomRef
+~ FirebaseDatabase firebaseDatabase
+# void onCreate(Bundle)
++ void searchForRoom()
++ void createNewRoom()
+# void onDestroy()
+}
+class com.example.chessproject.AppActivities.LoginActivity {
+~ FirebaseAuth firebaseAuth
+~ FirebaseDatabase firebaseDatabase
+~ Button btnLogin
+~ EditText etPass
+~ ProgressDialog progressDialog
+~ TextView errorDisplay
+# void onCreate(Bundle)
++ void onClick(View)
++ void StartSignUpActivity(View)
++ void LoginToApp(String,String)
+}
+class com.example.chessproject.AppActivities.LeaderboardActivity {
+~ ArrayList<LeaderBoardItem> userArrayList
+~ DatabaseReference userRef
+~ RecyclerView recyclerView
+~ ArrayList<String> pictureKeys
+~ leaderBoardAdapter adapter
+~ ProgressDialog progressDialog
+# void onCreate(Bundle)
++ void getUserImage(LeaderBoardItem,String)
+}
+class com.example.chessproject.BoardUtilities.Move {
+- Coordinate startCoordinate
+- Coordinate CandidateCoordinate
++ <<Create>> Move(Coordinate,Coordinate)
++ Coordinate getStartCoordinate()
++ void setStartCoordinate(Coordinate)
++ Coordinate getCandidateCoordinate()
++ void setCandidateCoordinate(Coordinate)
+}
+class com.example.chessproject.BoardUtilities.Room {
++ Player player1
++ Player player2
++ String boardFEN
++ <<Create>> Room()
++ <<Create>> Room(Player,Player,String)
+}
+class com.example.chessproject.BoardUtilities.TimerTask {
++ TextView userTimerView
++ boolean isUserTimerRunning
+~ int userSecondsCounter
+~ ChessCanvas chessCanvasReference
++ <<Create>> TimerTask(TextView,TextView,boolean,boolean,ChessCanvas)
+# void onPreExecute()
+# String doInBackground(Integer)
+# void onProgressUpdate(Integer)
+# void onPostExecute(String)
+}
+class com.example.chessproject.ChessPieces.Knight {
++ <<Create>> Knight(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.AppActivities.SignUpActivity {
+~ EditText etEmail
+~ TextView tvErrorDisplay
+~ Button btnSignUp
+~ ImageView ShowProfilePicture
+~ ProgressDialog progressDialog
+~ FirebaseAuth firebaseAuth
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference databaseReference
+~ StorageReference storageReference
+~ ActivityResultLauncher<Intent> activityResultLauncher
+# void onCreate(Bundle)
++ void onClick(View)
++ boolean checkFields()
++ void takePictureFromCamera()
++ void UploadPictureToStorage()
++ void SignUpToApp(String,String)
+}
+class com.example.chessproject.BoardUtilities.Board {
+- Tile[][] piece_array
++ Color playerColor
++ <<Create>> Board(Color)
++ Tile[][] getPiece_array()
++ void applyMove(Move)
++ boolean isKingUnderCheck()
++ boolean isCheckMate()
++ boolean isDraw()
+- boolean AnyPieceCanCancelCheck()
+- ArrayList<Move> canCertainPieceCancelCheck(Piece,Coordinate)
++ ArrayList<Move> returnLegalMovesToCanvas(Piece,Coordinate)
+- void filterLegalMoves(ArrayList<Move>)
+- boolean DoesMoveRevealKingToCheck(Move)
+- boolean DoesMoveDefense(Move)
+}
+class com.example.chessproject.UserUtils.UserData {
++ {static} Bitmap bitmap
++ {static} String email
++ {static} int ChessScore
++ {static} String username
++ {static} String password
+}
+class com.example.chessproject.ChessPieces.Bishop {
++ <<Create>> Bishop(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.ChessPieces.Queen {
++ <<Create>> Queen(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+class com.example.chessproject.AppActivities.GameActivity {
+~ ImageView UserProfilePic
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference roomReference
+~ Room playRoom
+~ LinearLayout chessLayout
+~ ChessCanvas chessCanvas
+~ TextView UserUsername
+~ String enemyUID
+~ TextView enemyTimerView
+~ Dialog endGameDialog
+~ Button dialogExitBtn
+~ AlertDialog quitDialog
+# void onCreate(Bundle)
++ void updateUI()
++ void setPlayersProfilePic()
++ void setPlayersData()
++ int getScreenWidth()
++ void userLost()
++ void createLossDialog()
++ void userWon()
++ void createWinDialog()
++ void onBackPressed()
++ void showQuitDialog()
++ void userQuit()
++ void playerWonByQuit()
++ void createWinByQuitDialog()
++ void draw()
++ void showDrawDialog()
++ void userRunOutOfTime()
++ void enemyRunOutOfTime()
++ void showEnemyRunOutOfTimeDialog()
++ void showUserRunOutOfTimeDialog()
++ void stopGameTimer()
+# void onDestroy()
+}
+class com.example.chessproject.BoardUtilities.ChessCanvas {
++ TimerTask gameTimer
+~ boolean playerClickOnce
+~ Context context
+~ Board game_board
+~ int screenWidth
+~ boolean isPlayerTurn
+~ FirebaseDatabase firebaseDatabase
+~ DatabaseReference playRoomReference
+~ Color playerColor
+~ ArrayList<Move> candidateLegalMoves
+~ TextView userTimerView
+~ Move playerMoveToApply
+~ ValueEventListener playRoomListener
+~ ArrayList<String> allGameMoves
+~ int boardColorID
+~ Player enemyPlayer
++ <<Create>> ChessCanvas(Context,int,String,String,TextView,TextView)
+# void onDraw(Canvas)
++ void getBoardColor()
++ void drawWhiteViewBoard(Canvas)
++ void drawBlackViewBoard(Canvas)
++ boolean onTouchEvent(MotionEvent)
++ void clickTheBoard(float,float)
++ void updateUserQuit()
++ void updateTimeIsUp()
++ boolean isValidMove(Coordinate)
++ void displayCandidateCoordinate(Canvas)
+}
+enum com.example.chessproject.BoardUtilities.Color {
++  BLACK
++  WHITE
+}
+class com.example.chessproject.ChessPieces.Rook {
++ <<Create>> Rook(Color)
++ ArrayList<Move> calculateLegalMoves(Coordinate,Tile[][])
+}
+interface com.example.chessproject.GamesRecords.GameRecordRecyclerViewInterface {
+~ void onItemClick(int)
+}
+
+
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.Pawn
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.ShowPreviousGameActivity
+com.example.chessproject.AppActivities.ShowPreviousGameActivity +.. com.example.chessproject.AppActivities.ShowPreviousGameActivity$recordedGameCanvas
+com.example.chessproject.AppActivities.View <|-- com.example.chessproject.AppActivities.ShowPreviousGameActivity$recordedGameCanvas
+com.example.chessproject.GamesRecords.Adapter <|-- com.example.chessproject.GamesRecords.gameRecordAdapter
+com.example.chessproject.GamesRecords.gameRecordAdapter +.. com.example.chessproject.GamesRecords.gameRecordAdapter$gameRecordViewHolder
+com.example.chessproject.GamesRecords.ViewHolder <|-- com.example.chessproject.GamesRecords.gameRecordAdapter$gameRecordViewHolder
+androidx.fragment.app.Fragment <|-- com.example.chessproject.Fragments.HomeScreenFragment
+com.example.chessproject.GamesRecords.GameRecordRecyclerViewInterface <|.. com.example.chessproject.AppActivities.PreviousGamesActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.PreviousGamesActivity
+androidx.fragment.app.Fragment <|-- com.example.chessproject.Fragments.SettingsScreenFragment
+com.example.chessproject.Fragments.OnClickListener <|.. com.example.chessproject.Fragments.UserProfileScreenFragment
+androidx.fragment.app.Fragment <|-- com.example.chessproject.Fragments.UserProfileScreenFragment
+com.example.chessproject.LeaderBoard.Adapter <|-- com.example.chessproject.LeaderBoard.leaderBoardAdapter
+com.example.chessproject.LeaderBoard.leaderBoardAdapter +.. com.example.chessproject.LeaderBoard.leaderBoardAdapter$leaderboardViewHolder
+com.example.chessproject.LeaderBoard.ViewHolder <|-- com.example.chessproject.LeaderBoard.leaderBoardAdapter$leaderboardViewHolder
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.MainActivity
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.King
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.WaitingRoomActivity
+com.example.chessproject.AppActivities.OnClickListener <|.. com.example.chessproject.AppActivities.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.LeaderboardActivity
+android.os.AsyncTask <|-- com.example.chessproject.BoardUtilities.TimerTask
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.Knight
+com.example.chessproject.AppActivities.OnClickListener <|.. com.example.chessproject.AppActivities.SignUpActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.SignUpActivity
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.Bishop
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.Queen
+androidx.appcompat.app.AppCompatActivity <|-- com.example.chessproject.AppActivities.GameActivity
+android.view.View <|-- com.example.chessproject.BoardUtilities.ChessCanvas
+com.example.chessproject.ChessPieces.Piece <|-- com.example.chessproject.ChessPieces.Rook
+@enduml
